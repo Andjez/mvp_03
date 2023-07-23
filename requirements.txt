@@ -1,0 +1,9 @@
+langchain
+streamlit-chat
+openai
+streamlit
+youtube-transcript-api
+pytube
+InstructorEmbedding
+sentence-transformers
+faiss-cpu
