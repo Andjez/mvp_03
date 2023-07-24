@@ -152,9 +152,11 @@ from langchain.prompts import PromptTemplate
 
 prompt_rephrase = PromptTemplate(
     input_variables=["user_Query","user_history"],
-    template="""You are a llm model which rephrase user query more suitable to
-    retieve informations from database which runs based on semantic search method in faiss database
-    and if user query is not a complete one or lagging proper information use history of last three user querys to make a complete and suitable query for databse retriever
+    template="""You are an AI language model designed to enhance user queries for
+    efficient information retrieval from a semantic search-enabled Faiss database.
+    If the user query is incomplete or lacks sufficient information, you can
+    leverage the history of the last three user queries to construct a comprehensive
+    and suitable query for the database retriever.
     user query:{user_Query}
     history of last three user querys:{user_history}
     """,
@@ -224,7 +226,7 @@ if  st.session_state.data_01 and st.session_state.data_02:
         last_conv = last_3()
         alter = llmchain.run({"user_Query": query, "user_history": last_conv})
         print(alter)
-        docs = st.session_state.new_db.similarity_search(alter,k=2)
+        docs = st.session_state.new_db.similarity_search(alter,k=3)
         his_qu = st.session_state.db_history.similarity_search(query,k=3)
         #last_conv = last_3()
         gen_messages = prompt_template.format_messages(database_data=docs,history_data=his_qu,Conversation_1_to_3=last_conv,User_query=query)
@@ -302,4 +304,9 @@ if  st.session_state.data_01 and st.session_state.data_02:
                             file_name=f'history_{name}_{date.today()}.zip',
                             mime='application/zip',
                         )
+        for i in range(len(docs)):
+            if i ==2:
+                st.write(docs[0])
+                st.write(docs[1])
+                st.write(docs[2])
 
