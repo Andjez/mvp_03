@@ -226,7 +226,7 @@ if  st.session_state.data_01 and st.session_state.data_02:
         last_conv = last_3()
         alter = llmchain.run({"user_Query": query, "user_history": last_conv})
         print(alter)
-        docs = st.session_state.new_db.similarity_search(alter,k=3)
+        docs = st.session_state.new_db.similarity_search(alter,k=5)
         his_qu = st.session_state.db_history.similarity_search(query,k=3)
         #last_conv = last_3()
         gen_messages = prompt_template.format_messages(database_data=docs,history_data=his_qu,Conversation_1_to_3=last_conv,User_query=query)
@@ -310,4 +310,6 @@ if  st.session_state.data_01 and st.session_state.data_02:
                     st.write(docs[0])
                     st.write(docs[1])
                     st.write(docs[2])
+                    st.write(docs[3])
+                    st.write(docs[4])
 
