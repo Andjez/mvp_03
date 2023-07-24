@@ -304,9 +304,10 @@ if  st.session_state.data_01 and st.session_state.data_02:
                             file_name=f'history_{name}_{date.today()}.zip',
                             mime='application/zip',
                         )
-        for i in range(len(docs)):
-            if i ==2:
-                st.write(docs[0])
-                st.write(docs[1])
-                st.write(docs[2])
+        if submitted and query:
+            for i in range(len(docs)):
+                if i ==2:
+                    st.write(docs[0])
+                    st.write(docs[1])
+                    st.write(docs[2])
 
